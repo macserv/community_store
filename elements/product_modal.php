@@ -31,7 +31,7 @@ $token = $app->make('token');
                 $formattedSalePrice = $product->getFormattedSalePrice();
                 $formattedOriginalPrice = $product->getFormattedOriginalPrice();
                 echo '<span class="store-sale-price">' . $formattedSalePrice . '</span>';
-                echo ' ' . t('was') . ' ' . '<span class="store-original-price">' . $formattedOriginalPrice . '</span>';
+                echo ' ' . '<span class="store-original-price">' . t('Regular Price: ') . $formattedOriginalPrice . '</span>';
             } else {
                 $formattedPrice = $product->getFormattedPrice();
                 echo $formattedPrice;

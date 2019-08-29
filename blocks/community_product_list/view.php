@@ -139,7 +139,7 @@ $isWholesale = \Concrete\Package\CommunityStore\Src\CommunityStore\Utilities\Who
                                 $formattedSalePrice = $product->getFormattedSalePrice();
                                 $formattedOriginalPrice = $product->getFormattedOriginalPrice();
                                 echo '<span class="store-sale-price">' . $formattedSalePrice . '</span>';
-                                echo ' ' . t('was') . ' ' . '<span class="store-original-price">' . $formattedOriginalPrice . '</span>';
+                                echo ' ' . '<span class="store-original-price">' . t('Regular Price: ') . ' ' . $formattedOriginalPrice . '</span>';
                             } else {
                                 $formattedPrice = $product->getFormattedPrice();
                                 echo $formattedPrice;
@@ -421,7 +421,7 @@ $isWholesale = \Concrete\Package\CommunityStore\Src\CommunityStore\Utilities\Who
 
                                     if (variationData[ar.join('_')]['saleprice']) {
                                         var pricing = '<span class="store-sale-price">' + variationData[ar.join('_')]['saleprice'] + '</span>' +
-                                            ' <?= t('was'); ?> ' + '<span class="store-original-price">' + variationData[ar.join('_')]['price'] + '</span>';
+                                            ' ' + '<span class="store-original-price">' + <?= t('Regular Price: '); ?> + variationData[ar.join('_')]['price'] + '</span>';
 
                                         pli.find('.store-product-list-price').html(pricing);
 

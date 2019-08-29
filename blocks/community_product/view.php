@@ -96,9 +96,9 @@ if (is_object($product) && $product->isActive()) {
                                 if (isset($salePrice) && "" != $salePrice) {
                                     $formattedSalePrice = $product->getFormattedSalePrice();
                                     $formattedOriginalPrice = $product->getFormattedOriginalPrice();
-                                    echo '<span class="store-sale-price">' . t("On Sale: ") . $formattedSalePrice . '</span>';
-                                    echo '&nbsp;' . t('was') . '&nbsp;';
-                                    echo '<span class="store-original-price">' . $formattedOriginalPrice . '</span>';
+                                    echo '<span class="store-sale-price">' . t("Sale Price: ") . $formattedSalePrice . '&nbsp;' . '</span>';
+                                    echo '<span class="store-original-price">' ;
+                                    echo t('Regular Price: ') . '&nbsp;' . $formattedOriginalPrice . '</span>';
                                     echo '<meta itemprop="price" content="' . $formattedSalePrice . '" />';
                                 } else {
                                     $price = $product->getPrice();
@@ -565,9 +565,8 @@ if (is_object($product) && $product->isActive()) {
                         '<br /><?= t('Wholesale Price');?>: ' + variationData[ar.join('_')]['wholesalePrice']);
                 } else {
                     if (variationData[ar.join('_')]['saleprice']) {
-                        var pricing = '<span class="store-sale-price"><?= t("On Sale: "); ?>' + variationData[ar.join('_')]['saleprice'] + '</span>&nbsp;' +
-                            '<?= t('was'); ?>' +
-                            '&nbsp;<span class="store-original-price ">' + variationData[ar.join('_')]['price'] + '</span>';
+                        var pricing = '<span class="store-sale-price"><?= t("Sale Price: "); ?>' + variationData[ar.join('_')]['saleprice'] + '</span>&nbsp;' +
+                            '&nbsp;<span class="store-original-price ">' + '<?= t('Regular Price: '); ?>'+ variationData[ar.join('_')]['price'] + '</span>';
 
                         pdb.find('.store-product-price').html(pricing);
                     } else {

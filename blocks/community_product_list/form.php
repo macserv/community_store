@@ -121,7 +121,7 @@
             <div class="form-group checkbox">
                 <label>
                     <?= $form->checkbox('showSale', 1, $showSale); ?>
-                    <?= t('Include On Sale Only'); ?>
+                    <?= t('Include On-Sale Only'); ?>
                 </label>
             </div>
             <div class="form-group checkbox">

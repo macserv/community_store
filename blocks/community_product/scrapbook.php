@@ -45,9 +45,9 @@ $csm = $app->make('cs/helper/multilingual');
                     if (isset($salePrice) && "" != $salePrice) {
                         $formattedSalePrice = $product->getFormattedSalePrice();
                         $formattedOriginalPrice = $product->getFormattedOriginalPrice();
-                        echo t('On Sale%s', ':&nbsp;') . $formattedSalePrice;
-                        echo ' ' . t('was') . ' ';
-                        echo '<span style="text-decoration: line-through">' . $formattedOriginalPrice . '</span>';
+                        echo t('Sale Price%s', ':&nbsp;') . $formattedSalePrice;
+                        echo ' ' ;
+                        echo '<span style="text-decoration: line-through">' . t('Regular Price: ') . ' '. $formattedOriginalPrice . '</span>';
                     } else {
                         $formattedPrice = $product->getFormattedPrice();
                         echo t('Price%s', ':&nbsp;');
