@@ -810,6 +810,18 @@ $ps = $app->make('helper/form/page_selector');
                                             <% if (poRequired == 1) { %>selected="selected"<% } %>><?= t('Yes'); ?></option></select>
                                     </div>
                                 </div>
+                                <% } else if (poType == 'checkbox') { %>
+                                <div class="col-xs-3">
+                                    <div class="form-group">
+                                        <label><?= t('Price Adj.'); ?></label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <?= Config::get('community_store.symbol'); ?>
+                                            </div>
+                                            <input type="text" class="form-control" name="poPriceAdjustment[]" placeholder="<?= t('Optional'); ?>" value="<%=poPriceAdjustment%>">
+                                        </div>
+                                    </div>
+                                </div>
                                 <% } else { %>
                                 <input type="hidden" value="0" name="poRequired[]"/>
                                 <% } %>
@@ -897,6 +909,7 @@ $ps = $app->make('helper/form/page_selector');
                         $displayType = $option->getDisplayType();
                         $handle = $option->getHandle();
                         $details = $option->getDetails();
+                        $priceAdjustment = $option->getPriceAdjustment();
                         $required = $option->getRequired();
                         $includeVariations = $option->getIncludeVariations();
 
@@ -915,6 +928,7 @@ $ps = $app->make('helper/form/page_selector');
                         $label = $labels[$type];
 
                         ?>
+                        alert('<?= h($option->getName()) . " " . $option->getPriceAdjustment() ?>')
                         optionsContainer.append(optionsTemplate({
                             poName: '<?= h($option->getName()) ?>',
                             poID: '<?= $option->getID()?>',
@@ -922,6 +936,7 @@ $ps = $app->make('helper/form/page_selector');
                             poDisplayType: '<?= $displayType ?>',
                             poLabel: '<?= $label; ?>',
                             poHandle: '<?= h($handle); ?>',
+                            poPriceAdjustment: '<?= $option->getPriceAdjustment() ?>',
                             poDetails: '<?= h($details); ?>',
                             poRequired: '<?= $required ? 1 : 0; ?>',
                             poIncludeVariations: '<?= $includeVariations ? 1 : 0; ?>',
@@ -948,6 +963,7 @@ $ps = $app->make('helper/form/page_selector');
                                 poDisplayType: 'select',
                                 poLabel: '<?= $labels['select']; ?>',
                                 poHandle: '',
+                                poPriceAdjustment: '',
                                 poDetails: '',
                                 poRequired: '',
                                 poIncludeVariations: '0',
@@ -974,6 +990,7 @@ $ps = $app->make('helper/form/page_selector');
                                 poType: 'text',
                                 poLabel: '<?= $labels['text']; ?>',
                                 poHandle: '',
+                                poPriceAdjustment: '',
                                 poDetails: '',
                                 poRequired: '',
                                 sort: temp
@@ -995,6 +1012,7 @@ $ps = $app->make('helper/form/page_selector');
                                 poType: 'textarea',
                                 poLabel: '<?= $labels['textarea']; ?>',
                                 poHandle: '',
+                                poPriceAdjustment: '',
                                 poDetails: '',
                                 poRequired: '',
                                 sort: temp
@@ -1016,6 +1034,7 @@ $ps = $app->make('helper/form/page_selector');
                                 poType: 'checkbox',
                                 poLabel: '<?= $labels['checkbox']; ?>',
                                 poHandle: '',
+                                poPriceAdjustment: '',
                                 poDetails: '',
                                 poRequired: '',
                                 sort: temp
@@ -1037,6 +1056,7 @@ $ps = $app->make('helper/form/page_selector');
                                 poType: 'hidden',
                                 poLabel: '<?= $labels['hidden']; ?>',
                                 poHandle: '',
+                                poPriceAdjustment: '',
                                 poDetails: '',
                                 poRequired: '',
                                 sort: temp
@@ -1066,8 +1086,21 @@ $ps = $app->make('helper/form/page_selector');
                                             <input type="checkbox" class="optionHiddenToggle" name="poiHiddenToggle[]" value="1" <%=poiHidden%> /> <?= t('Hide'); ?></label>
                                     </div>
                                 </div>
-                                <br>
-                                <input type="text" placeholder="<?= t('Selector Display Label - Optional');?>" name="poiSelectorName[]" class="form-control" value="<%=poiSelectorName%>">
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <input type="text" placeholder="<?= t('Selector Display Label - Optional');?>" name="poiSelectorName[]" class="form-control" value="<%=poiSelectorName%>">
+                                    </div>
+                                    <div class="col-sm-5">
+                                        
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <?= Config::get('community_store.symbol'); ?>
+                                            </div>
+                                            <input type="text" placeholder="<?= t('Price Adjustment');?>" name="poiPriceAdjustment[]" class="form-control" value="<%=poiPriceAdjustment%>">
+                                        </div>
+                                        
+                                    </div>
+                                </div>
                                 <input type="hidden" name="poiID[]" class="form-control" value="<%=poiID%>">
                             </div>
                             <div class="col-sm-2">
@@ -1107,6 +1140,7 @@ $ps = $app->make('helper/form/page_selector');
                             //vars to pass to the template
                             poiName: '',
                             poiSelectorName: '',
+                            poiPriceAdjustment: '',
                             poiID: '',
                             optGroup: group,
                             sort: temp,
@@ -1151,6 +1185,7 @@ $ps = $app->make('helper/form/page_selector');
                         optItemsContainer.append(optItemsTemplate({
                             poiName: '<?= h($optionItem->getName())?>',
                             poiSelectorName: '<?= h($optionItem->getSelectorName())?>',
+                            poiPriceAdjustment: '<?= h($optionItem->getPriceAdjustment())?>',
                             poiID: '<?= $optionItem->getID()?>',
                             optGroup: <?= $i?>,
                             sort: <?= $optionItem->getSort()?>,

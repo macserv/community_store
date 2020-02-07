@@ -42,6 +42,11 @@ class ProductOptionItem
      * @ORM\Column(type="string")
      */
     protected $poiName;
+    
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     */
+    protected $poiPriceAdjustment;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -66,6 +71,16 @@ class ProductOptionItem
     private function setName($name)
     {
         $this->poiName = $name;
+    }
+
+    public function setPriceAdjustment($poiPriceAdjustment)
+    {
+        $this->poiPriceAdjustment = ('' != $poiPriceAdjustment ? $poiPriceAdjustment : 0);
+    }
+
+    public function getPriceAdjustment()
+    {
+        return $this->poiPriceAdjustment;
     }
 
     private function setSelectorName($name)
@@ -163,11 +178,12 @@ class ProductOptionItem
         }
     }
 
-    public static function add($option, $name, $sort, $selectorname, $hidden = false, $persistonly = false)
+    public static function add($option, $name, $priceAdjustment, $sort, $selectorname, $hidden = false, $persistonly = false)
     {
         $productOptionItem = new self();
         $productOptionItem->setOption($option);
         $productOptionItem->setName($name);
+        $productOptionItem->setPriceAdjustment($priceAdjustment);
         $productOptionItem->setSelectorName($selectorname);
         $productOptionItem->setSort($sort);
         $productOptionItem->setHidden($hidden);
@@ -176,9 +192,10 @@ class ProductOptionItem
         return $productOptionItem;
     }
 
-    public function update($name, $sort, $selectorname, $hidden = false, $persistonly = false)
+    public function update($name, $priceAdjustment, $sort, $selectorname, $hidden = false, $persistonly = false)
     {
         $this->setName($name);
+        $this->setPriceAdjustment($priceAdjustment);
         $this->setSelectorName($selectorname);
         $this->setSort($sort);
         $this->setHidden($hidden);
