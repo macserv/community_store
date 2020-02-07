@@ -800,17 +800,8 @@ $ps = $app->make('helper/form/page_selector');
                                 <% } else { %>
                                 <input type="hidden" value="0" name="poIncludeVariations[]"/>
                                 <% } %>
-                                <% if (poType != 'select' && poType != 'checkbox') { %>
-                                <div class="col-xs-3">
-                                    <div class="form-group">
-                                        <label><?= t('Required'); ?></label>
-                                        <select class="form-control" name="poRequired[]">
-                                            <option value="0"><?= t('No'); ?></option>
-                                            <option value="1"
-                                            <% if (poRequired == 1) { %>selected="selected"<% } %>><?= t('Yes'); ?></option></select>
-                                    </div>
-                                </div>
-                                <% } else if (poType == 'checkbox') { %>
+                                
+                                <% if (poType == 'checkbox') { %>
                                 <div class="col-xs-3">
                                     <div class="form-group">
                                         <label><?= t('Price Adj.'); ?></label>
@@ -820,6 +811,20 @@ $ps = $app->make('helper/form/page_selector');
                                             </div>
                                             <input type="text" class="form-control" name="poPriceAdjustment[]" placeholder="<?= t('Optional'); ?>" value="<%=poPriceAdjustment%>">
                                         </div>
+                                    </div>
+                                </div>
+                                <% } else { %>
+                                <input type="hidden" value="0" name="poPriceAdjustment[]"/>
+                                <% } %>
+                                
+                                <% if (poType != 'select' && poType != 'checkbox') { %>
+                                <div class="col-xs-3">
+                                    <div class="form-group">
+                                        <label><?= t('Required'); ?></label>
+                                        <select class="form-control" name="poRequired[]">
+                                            <option value="0"><?= t('No'); ?></option>
+                                            <option value="1"
+                                            <% if (poRequired == 1) { %>selected="selected"<% } %>><?= t('Yes'); ?></option></select>
                                     </div>
                                 </div>
                                 <% } else { %>
@@ -928,7 +933,7 @@ $ps = $app->make('helper/form/page_selector');
                         $label = $labels[$type];
 
                         ?>
-                        alert('<?= h($option->getName()) . " " . $option->getPriceAdjustment() ?>')
+                        // DEBUG: alert('<?= h($option->getName()) . " " . $option->getPriceAdjustment() ?>')
                         optionsContainer.append(optionsTemplate({
                             poName: '<?= h($option->getName()) ?>',
                             poID: '<?= $option->getID()?>',
